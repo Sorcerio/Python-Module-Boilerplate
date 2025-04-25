@@ -12,7 +12,7 @@ MODULE_DESCRIPTION
     1. This is primarily for the [LICENSE.txt](./LICENSE.txt).
 1. Decide if you want to use tools for this module:
     * **I *do* want to use tools:**
-        1. Leave the rest of the package as is.
+        1. Leave the package as is.
         1. Use [BaseTool](./src/tools/baseTool.py) as a super class for any tools you make.
         1. Implement the required methods from [BaseTool](./src/tools/baseTool.py) in any tools you make.
             * See [DemoTool](./src/tools/demo.py) for an example implementation of [BaseTool](./src/tools/baseTool.py).
@@ -24,14 +24,24 @@ MODULE_DESCRIPTION
             1. Remove `collectTools()`.
             1. Remove all code in `startCli()` between `Tools Setup Start` and `Tools Setup End`.
             1. Remove all code in `startCli()` between `Tools Usage Start` and `Tools Usage End`.
+1. Decide if you want to use configs for this module:
+    * **I *do* want to use configs:**
+        1. Leave the package as is.
+        1. Modify [config.toml](./config.toml) as needed.
+    * **I *do not* want to use configs:**
+        1. Remove [config.toml](./config.toml).
+        1. Remove [config.py](./src/config.py).
+        1. Remove `from .config import ConfigManager` from the primary [\_\_init\_\_.py](./src/__init__.py)
 1. Remove this section from the README.
-1. Implement additional functionality as needed
+1. Add and remove `config.toml` to the [.gitignore](./.gitignore) as needed.
+    * Make sure not to commit any keys or private information!
+1. Implement additional functionality as needed.
 
 ---
 
 ## Local Setup
 
-1. Create a Python 3 virtual environment: `python -m venv .venv`
+1. Create a Python 3.11 *or higher* virtual environment: `python -m venv .venv`
 1. Enter the environment:
     * Windows: `.\.venv\Scripts\activate`
     * MacOS/Linux: `source .venv/bin/activate`
