@@ -47,6 +47,12 @@ def collectTools() -> list[BaseTool]:
         except Exception as e:
             print(f"Error importing {pathModule} from '{pathRelative}': {e}")
 
+    # Remove duplicates
+    tools = list({tool.TOOL_NAME: tool for tool in tools}.values())
+
+    # Order alphabetically
+    tools.sort(key=lambda x: x.TOOL_NAME)
+
     return tools
 
 def startCli():
