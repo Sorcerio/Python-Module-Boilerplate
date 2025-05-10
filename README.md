@@ -1,10 +1,8 @@
-# PYTHON_BOILER_PLATE
+# Python Boiler Plate Setup
 
-MODULE_DESCRIPTION
+Python Boiler Plate is a module boilerplate with built-in CLI tool support using `argparse`.
 
----
-
-## PBP Instructions
+To configure the boilerplate for your project follow these instructions:
 
 1. Replace `MODULE_DESCRIPTION` with a description of your module's function.
 1. Replace `PYTHON_BOILER_PLATE` in all files with the name of your project.
@@ -14,6 +12,12 @@ MODULE_DESCRIPTION
 1. Configure `config.toml` as needed.
     * Make sure not to commit any keys or private information!
 1. Implement additional functionality as needed.
+
+---
+
+# PYTHON_BOILER_PLATE
+
+MODULE_DESCRIPTION
 
 ---
 
