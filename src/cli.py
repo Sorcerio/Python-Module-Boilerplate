@@ -92,10 +92,10 @@ def startCli():
     # Load config
     config: Optional[ConfigManager] = None
     try:
-        config = ConfigManager()
+        config = ConfigManager(configPath=CONFIG_PATH)
     except FileNotFoundError as e:
         if not SILENCE_MISSING_CONFIG:
-            print("Configuration file not found. If this is intentional, set `SILENCE_MISSING_CONFIG` to `True` in `cli.py`.")
+            print(f"Configuration file not found (`{CONFIG_PATH.absolute()}`). If this is intentional, set `SILENCE_MISSING_CONFIG` to `True` in `cli.py`.")
 
     # Decide what tool to run
     if args.command is None:
