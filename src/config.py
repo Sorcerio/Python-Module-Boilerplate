@@ -20,6 +20,13 @@ class ConfigManager:
         self.path = (Path(configPath) if configPath else Path.cwd() / "config.toml").absolute()
         self.data = self._loadConfig()
 
+    # Python Functions
+    def __repr__(self) -> str:
+        return f"ConfigManager(path={self.path.absolute()}, data={self.data})"
+
+    def __str__(self) -> str:
+        return self.__repr__()
+
     # Private Functions
     def _loadConfig(self) -> dict[str, Any]:
         """

@@ -3,6 +3,9 @@
 
 # MARK: Imports
 import argparse
+from typing import Optional
+
+from ..config import ConfigManager
 
 # MARK: Classes
 class BaseTool:
@@ -21,21 +24,25 @@ class BaseTool:
 
         parser: The parser to apply the arguments to.
         """
-        raise NotImplementedError("applyParserArgs() must be implemented in the subclass.")
+        raise NotImplementedError("setupParser() must be implemented in the subclass.")
 
     @classmethod
-    def fromArgs(cls, args: argparse.Namespace) -> "BaseTool":
+    def fromArgs(cls, args: argparse.Namespace, config: Optional[ConfigManager]) -> "BaseTool":
         """
         Creates an instance of this tool from the given `args`.
 
         args: The parser arguments to create the tool from.
+        config: The config manager to use for the tool or `None` if not present.
 
         Returns an instance of this tool.
         """
         raise NotImplementedError("fromArgs() must be implemented in the subclass.")
 
-    def run(self):
+    def _run(self, args: argparse.Namespace, config: Optional[ConfigManager]):
         """
-        Runs the tool as configured.
+        Runs the tool as configured by the CLI.
+
+        args: The parser arguments to create the tool from.
+        config: The config manager to use for the tool or `None` if not present.
         """
-        raise NotImplementedError("run() must be implemented in the subclass.")
+        raise NotImplementedError("_run() must be implemented in the subclass.")

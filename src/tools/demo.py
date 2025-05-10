@@ -3,8 +3,10 @@
 
 # MARK: Imports
 import argparse
+from typing import Optional
 
 from .baseTool import BaseTool
+from ..config import ConfigManager
 
 # MARK: Classes
 class DemoTool(BaseTool):
@@ -36,19 +38,25 @@ class DemoTool(BaseTool):
         )
 
     @classmethod
-    def fromArgs(cls, args: argparse.Namespace) -> "DemoTool":
+    def fromArgs(cls, args: argparse.Namespace, config: Optional[ConfigManager]) -> "DemoTool":
         """
         Creates an instance of this tool from the given `args`.
 
         args: The parser arguments to create the tool from.
+        config: The config manager to use for the tool.
 
         Returns an instance of this tool.
         """
         return cls(args.demo)
 
-    def run(self):
+    def _run(self, args: argparse.Namespace, config: Optional[ConfigManager]):
         """
-        Runs the tool as configured.
+        Runs the tool as configured by the CLI.
+
+        args: The parser arguments to create the tool from.
+        config: The config manager to use for the tool.
         """
         print("Running demo tool!")
         print(f"Is A: {self.isA}")
+        print(f"Args: {args}")
+        print(f"Config: {config}")

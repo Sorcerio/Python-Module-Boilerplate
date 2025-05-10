@@ -9,31 +9,9 @@ MODULE_DESCRIPTION
 1. Replace `MODULE_DESCRIPTION` with a description of your module's function.
 1. Replace `PYTHON_BOILER_PLATE` in all files with the name of your project.
 1. Replace `DEVELOPER_IDENTIFIER` with your name or other developer identifier.
-    1. This is primarily for the [LICENSE.txt](./LICENSE.txt).
-1. Decide if you want to use tools for this module:
-    * **I *do* want to use tools:**
-        1. Leave the package as is.
-        1. Use [BaseTool](./src/tools/baseTool.py) as a super class for any tools you make.
-        1. Implement the required methods from [BaseTool](./src/tools/baseTool.py) in any tools you make.
-            * See [DemoTool](./src/tools/demo.py) for an example implementation of [BaseTool](./src/tools/baseTool.py).
-        1. Delete [DemoTool](./src/tools/demo.py) as needed.
-    * **I *do not* want to use tools:**
-        1. Remove the [tools/](./src/tools/) directory.
-        1. Open [cli.py](./src/cli.py) then:
-            1. Remove `PY_FILE_BLACKLIST`.
-            1. Remove `collectTools()`.
-            1. Remove all code in `startCli()` between `Tools Setup Start` and `Tools Setup End`.
-            1. Remove all code in `startCli()` between `Tools Usage Start` and `Tools Usage End`.
-1. Decide if you want to use configs for this module:
-    * **I *do* want to use configs:**
-        1. Leave the package as is.
-        1. Modify [config.toml](./config.toml) as needed.
-    * **I *do not* want to use configs:**
-        1. Remove [config.toml](./config.toml).
-        1. Remove [config.py](./src/config.py).
-        1. Remove `from .config import ConfigManager` from the primary [\_\_init\_\_.py](./src/__init__.py)
+    * This is primarily for the [LICENSE.txt](./LICENSE.txt).
 1. Remove this section from the README.
-1. Add and remove `config.toml` to the [.gitignore](./.gitignore) as needed.
+1. Configure `config.toml` as needed.
     * Make sure not to commit any keys or private information!
 1. Implement additional functionality as needed.
 

@@ -6,10 +6,15 @@ import inspect
 import importlib
 import argparse
 from pathlib import Path
+from typing import Optional, Union
 
+from .config import ConfigManager
 from .tools.baseTool import BaseTool
 
 # MARK: Constants
+CONFIG_PATH: Optional[Union[str, Path]] = None # `None` to use default
+SILENCE_MISSING_CONFIG = False
+
 PY_FILE_BLACKLIST = [
     "__init__.py",
     "baseTool.py",
@@ -62,12 +67,11 @@ def startCli():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
 
-    # > Tools Setup Start
+    # Prepare command subparser group
     commandParsers = parser.add_subparsers(dest="command", title="commands")
 
     # Get the tools
     tools = collectTools()
-
     if len(tools) == 0:
         print("No tools found.")
         return
@@ -81,12 +85,18 @@ def startCli():
             formatter_class=argparse.ArgumentDefaultsHelpFormatter
         )
         tool.setupParser(toolParser)
-    # > Tools Setup End
 
     # Parse args
     args = parser.parse_args()
 
-    # > Tools Usage Start
+    # Load config
+    config: Optional[ConfigManager] = None
+    try:
+        config = ConfigManager()
+    except FileNotFoundError as e:
+        if not SILENCE_MISSING_CONFIG:
+            print("Configuration file not found. If this is intentional, set `SILENCE_MISSING_CONFIG` to `True` in `cli.py`.")
+
     # Decide what tool to run
     if args.command is None:
         # No tool specified
@@ -96,10 +106,9 @@ def startCli():
     for tool in tools:
         if tool.TOOL_NAME == args.command:
             # Run the tool
-            tool.fromArgs(args).run()
+            tool.fromArgs(args, config)._run(args, config)
             return
 
     # No tool found
     print(f"Tool '{args.command}' not found.\n")
     parser.print_help()
-    # > Tools Usage End
